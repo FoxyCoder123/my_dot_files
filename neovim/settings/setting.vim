@@ -16,6 +16,7 @@ set shiftwidth=4
 set autoindent
 set nu
 set rnu
+set smarttab
 set ttyfast
 set smartindent
 set noswapfile
@@ -35,7 +36,7 @@ set cc=80
 set wildmode=longest,list,full
 set updatetime=250
 set t_Co=256
+set cursorline
 
 filetype plugin indent on 
 filetype plugin on
-

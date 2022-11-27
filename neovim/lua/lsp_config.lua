@@ -23,7 +23,7 @@ end
  
 
 --capabilities
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
 capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
@@ -101,7 +101,7 @@ nvim_lsp.gopls.setup{
         },
     },
     flags = {
-      debounce_text_changes = 150, -- Wait 5 seconds before sending didChange
+      debounce_text_changes = 100, -- Wait 5 seconds before sending didChange
     },
 	on_attach = on_attach,
     capabilities=capabilities
@@ -128,7 +128,7 @@ end
 
 nvim_lsp.pyright.setup{
     flags = {
-      debounce_text_changes = 150, -- Wait 5 seconds before sending didChange
+      debounce_text_changes = 100, -- Wait 5 seconds before sending didChange
     },
 	on_attach = on_attach,
     capabilities=capabilities
@@ -139,8 +139,8 @@ nvim_lsp.pyright.setup{
 --Beautifying LSP status like E H W to cooler
 --You must have nerd to enable this
 
-local signs =  {Error = "🔺️", Warn = "⚠️ ", Hint = "💡️", Info = "ℹ️ " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end

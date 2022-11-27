@@ -1,16 +1,14 @@
 "-----------------------------------------------------
-"theme settings for Neovim
+"TokyoNight theme config
 "-----------------------------------------------------
-
-"colorscheme NeoSolarized
-"let g:neosolarized_visibility = "high"
-"let g:neosolarized_vertSplitBgTrans = 1
-"let g:neosolarized_italic = 0
+colorscheme tokyonight-storm
 
 "-----------------------------------------------------
 "Moving across windows in vim
 "-----------------------------------------------------
 
+"remapping leader key
+let mapleader = " "
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
@@ -32,13 +30,13 @@ let g:user_emmet_leader_key=','
 "-----------------------------------------------------
 
 "for spliting the vim in vertical
-nnoremap <silent> <C-v> :vs<CR>
+nnoremap <silent><leader>v :vs<CR>
 
 "for spliting the vim in horizontal
-nnoremap <silent> <C-h> :sp<CR>
+nnoremap <silent><leader>b :sp<CR>
 
 "for select all the lines ie, press \a to select all
-nnoremap <leader>a ggVG
+nnoremap <S-a> ggVG
 
 "-----------------------------------------------------
 "Navigation within vim
@@ -46,9 +44,9 @@ nnoremap <leader>a ggVG
 
 "multiple tab settings
 
-nnoremap <silent> <S-t> :tabnew<CR>
-nnoremap <silent> <S-a> :tabp<CR>
-nnoremap <silent> <S-d> :tabn<CR>
+nnoremap <silent><leader>t :tabnew<CR>
+nnoremap <silent><leader>a :tabp<CR>
+nnoremap <silent><leader>d :tabn<CR>
 
 "for naming the newfile in the new tab use 
 "**** :write name-of-the-document ****
@@ -75,7 +73,7 @@ autocmd filetype c nnoremap <F4> :w <bar> exec '!clear;gcc '.shellescape('%').' 
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!clear;g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 autocmd FileType make set noexpandtab
-
+au Filetype python setl et ts=4 sw=4
 "-----------------------------------------------------
 "Autocompletion of brackets and punctuations
 "-----------------------------------------------------
@@ -94,11 +92,30 @@ inoremap ` ``<left>
 inoremap ``` ```<cr>```<esc>O
 
 "-----------------------------------------------------
-"NerdCommenter config
+"comment.nvim configs
 "-----------------------------------------------------
 
-nmap <C-c>   <Plug>NERDCommenterToggle
-vmap <C-c>   <Plug>NERDCommenterToggle<CR>gv
+"usage:
+"`gcc` - Toggles the current line using linewise comment
+"`gbc` - Toggles the current line using blockwise comment
+"`[count]gcc` - Toggles the number of line given as a "prefix-count using linewise
+"`[count]gbc` - Toggles the number of line given as a "prefix-count using blockwise
+"`gc[count]{motion}` - (Op-pending) Toggles the region using "linewise comment
+"`gb[count]{motion}` - (Op-pending) Toggles the region using "blockwise comment
+"
+"# Linewise
+"`gcw` - Toggle from the current cursor position to the next word
+"`gc$` - Toggle from the current cursor position to the end of "line
+"`gc}` - Toggle until the next blank line
+"`gc5j` - Toggle 5 lines after the current cursor position
+"`gc8k` - Toggle 8 lines before the current cursor position
+"`gcip` - Toggle inside of paragraph
+"`gca}` - Toggle around curly brackets
+"
+"# Blockwise
+"`gb2}` - Toggle until the 2 next blank line
+"`gbaf` - Toggle comment around a function (w/ LSP/treesitter "support)
+"`gbac` - Toggle comment around a class (w/ LSP/treesitter "support)
 
 
 "-----------------------------------------------------
@@ -129,4 +146,7 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 
-
+"-----------------------------------------------------
+"NVIM Tree configs
+"-----------------------------------------------------
+nnoremap <silent> <leader>n :NvimTreeToggle<CR>
